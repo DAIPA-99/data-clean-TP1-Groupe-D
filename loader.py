@@ -31,7 +31,7 @@ def load_formatted_data(data_fname:str) -> pd.DataFrame:
     df = pd.read_csv(
         data_fname,
         usecols= ['nom','lat_coor', 'long_coor','tel1','dermnt','freq_mnt','adr_num','adr_voie','com_cp','com_nom']
-        dtype= dtypes,
+        dtype= ,
         )
     return df
 
