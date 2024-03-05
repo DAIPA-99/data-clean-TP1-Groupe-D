@@ -43,11 +43,10 @@ def sanitize_data(df:pd.DataFrame) -> pd.DataFrame:
     def check_and_remove_unique_value(df):
         for index, row in df.iterrows():
             if pd.notna(row['lat_coor1']) and pd.isna(row['long_coor1']):
-            df.at[index, 'lat_coor1'] = pd.NaT
+            df.at[index, 'lat_coor1'] = pd.NaN
             elif pd.isna(row['lat_coor1']) and pd.notna(row['long_coor1']):
-            df.at[index, 'long_coor1'] = pd.NaT
+            df.at[index, 'long_coor1'] = pd.NaN
 
-    check_and_remove_unique_value(df)
     
     def remove_non_float_values(df, column_name):
         df[column_name] = pd.to_numeric(df[column_name], errors='coerce')
@@ -55,6 +54,7 @@ def sanitize_data(df:pd.DataFrame) -> pd.DataFrame:
     
     remove_non_float_values(df, "lat_coor1")
     remove_non_float_values(df, "long_coor1")
+    check_and_remove_unique_value(df)
         
     return df
 
