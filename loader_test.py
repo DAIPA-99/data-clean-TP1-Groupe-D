@@ -164,6 +164,9 @@ def sample_dirty_fname() -> str:
 
     return df"""
 
+df = pd.read_csv(, delimiter=';')
+
+
 
 @pytest.fixture
 def sample_sanitized() -> pd.DataFrame:
