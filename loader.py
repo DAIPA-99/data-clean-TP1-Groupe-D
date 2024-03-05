@@ -55,6 +55,21 @@ def sanitize_data(df:pd.DataFrame) -> pd.DataFrame:
     remove_non_float_values(df, "lat_coor1")
     remove_non_float_values(df, "long_coor1")
     check_and_remove_unique_value(df)
+
+    """La fonction suivante sert à extraire les dates"""
+    def filter_date_formats(df, column_name):
+        df[column_name] = df[column_name].astype(str)  # Convert column to string to handle mixed types
+        date_pattern = re.compile(r'\b\d{2}[/-]\d{2}[/-]\d{4}\b')
+
+        def extract_valid_dates(cell):
+            matches = re.findall(date_pattern, cell)
+            return ', '.join(matches) if matches else pd.NaT
+
+        df[column_name] = df[column_name].apply(extract_valid_dates)
+        df = df.dropna(subset=[column_name])
+
+    filter_date_formats(df, "dermnt")
+        
         
     return df
 
