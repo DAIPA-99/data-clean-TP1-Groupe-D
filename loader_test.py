@@ -162,7 +162,7 @@ def sample_dirty_fname() -> str:
                'lat_coor1': 'float', 'long_coor1': 'float'}
     )
 
-    return df
+    return df"""
 
 
 @pytest.fixture
