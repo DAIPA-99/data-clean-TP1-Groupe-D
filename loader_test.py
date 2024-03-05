@@ -13,7 +13,7 @@ def sample_dirty_fname() -> str:
 
 
 @pytest.fixture
-"""def sample_formatted() -> pd.DataFrame:
+"""def sample_formatted() -> pd.DataFrame:"""
     df = pd.DataFrame(
         data={
             'nom': ['Plateau sportif de GrammontTerrain 9, 10, 11',
