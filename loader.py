@@ -39,7 +39,23 @@ def load_formatted_data(data_fname:str) -> pd.DataFrame:
 # once they are all done, call them in the general sanitizing function
 def sanitize_data(df:pd.DataFrame) -> pd.DataFrame:
     """ One function to do all sanitizing"""
-    ...
+    """ Les deux fonctions suivantes serviront pour les latitudes longitudes"""
+    def check_and_remove_unique_value(df):
+        for index, row in df.iterrows():
+            if pd.notna(row['lat_coor1']) and pd.isna(row['long_coor1']):
+            df.at[index, 'lat_coor1'] = pd.NaT
+            elif pd.isna(row['lat_coor1']) and pd.notna(row['long_coor1']):
+            df.at[index, 'long_coor1'] = pd.NaT
+
+    check_and_remove_unique_value(df)
+    
+    def remove_non_float_values(df, column_name):
+        df[column_name] = pd.to_numeric(df[column_name], errors='coerce')
+        df = df.dropna(subset=[column_name])
+    
+    remove_non_float_values(df, "lat_coor1")
+    remove_non_float_values(df, "long_coor1")
+        
     return df
 
 
