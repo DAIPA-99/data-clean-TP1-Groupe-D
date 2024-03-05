@@ -1,0 +1,43 @@
+|OK| Nom
+
+Si il n'y a pas de nom, mettre la valeur de adr_voie
+
+adr_num
+
+Si dans adr_num il y'a deux valeurs séparées par un tiret, bien les exprimer sous la forme XXX-XXX sans espace
+Garder les bis, mais sans espace aussi 
+Enlever les tirets tout seul
+Enlever tout ce qui n'est pas des entiers, des tirets, ou bis 
+
+adr_voie
+
+Si l'adresse fait moins de 3 caractère, la supprimer 
+Si l'adresse à une chaine de 5 entiers consécutifs (code postale) la supprimer
+
+com_cp
+
+Si la donnée n'est pas de la forme XXXXX, où X est un chiffre, la supprimer
+
+com_nom
+
+Si la donnée appartient à ce csv: https://www.data.gouv.fr/fr/datasets/villes-de-france/ (ne pas prendre en compte les majuscules et les minuscules dans la recherche
+
+tel 1
+
+|OK| retirer les +, tout numéros qui n'a pas la forme XXX_XX_XX_XX_XX n'est pas acceptable 
+|OK| retirer les -
+
+freq_mnt
+
+Transformer tout les "tous,tout,Tous" en "Tous"
+Garder "Tous les ans", "Tous les mois", "Tous les jours" et virer le reste
+
+dermnt
+
+Garder les XX/XX/XXXX et les XX-XX-XXXX
+
+|OK| lat_coor1 et long_coor1
+
+|OK| Garder ceux ou y'a des valeurs dans les deux 
+|OK| Garder que les float 
+
