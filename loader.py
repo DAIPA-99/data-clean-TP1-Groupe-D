@@ -39,6 +39,21 @@ def load_formatted_data(data_fname:str) -> pd.DataFrame:
 # once they are all done, call them in the general sanitizing function
 def sanitize_data(df:pd.DataFrame) -> pd.DataFrame:
     """ One function to do all sanitizing"""
+
+    """Enleve le + des numeros et enleve les valeurs manquantes"""
+    def correction_tel(df):
+        caractere_a_supprimer = '+'
+        masque = df['tel1'].str.startswith(caractere_a_supprimer)
+        df.loc[masque, 'tel1'] = df.loc[masque, 'tel1'].str.replace(caractere_a_supprimer, '')
+
+        import re
+        motif_telephone = re.compile(r'^\d{3}\s\d{2}\s\d{2}\s\d{2}\s\d{2}$')
+        df_filtre = df[df['tel1'].apply(lambda x: bool(motif_telephone.match(x)))]
+
+        return df_filtre
+        
+    correction_tel(df)
+
     """ Les deux fonctions suivantes serviront pour les latitudes longitudes"""
     def check_and_remove_unique_value(df):
         for index, row in df.iterrows():
