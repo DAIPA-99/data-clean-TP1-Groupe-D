@@ -36,9 +36,40 @@ def load_formatted_data(data_fname:str) -> pd.DataFrame:
     return df
 
 
-# once they are all done, call them in the general sanitizing function
+""" once they are all done, call them in the general sanitizing function """"
 def sanitize_data(df:pd.DataFrame) -> pd.DataFrame:
     """ One function to do all sanitizing"""
+    import re
+
+def clean_address_numbers(adr_num):
+    nouvelle_adr_num = []
+    for element in adr_num:
+        if element.strip() == '-':
+            nouvelle_adr_num.append('')
+        elif ' - ' in element or '-' in element:
+            numbers = re.findall(r'\b\d+\b', element)
+            if len(numbers) == 2:
+                clean_element = '-'.join(numbers)
+                nouvelle_adr_num.append(clean_element)
+            else:
+                nouvelle_adr_num.append('')
+        elif re.match("^[A-Za-z\s]+$", element):
+            nouvelle_adr_num.append('')
+        elif ' ' in element:
+            if 'bis' in element:
+                clean_element = element.replace(' ', '')
+            else:
+                match = re.search(r'\b\d+\b', element)
+                if match:
+                    clean_element = match.group()
+                else:
+                    clean_element = ''
+            nouvelle_adr_num.append(clean_element)
+        else:
+            clean_element = ''.join(element.split())
+            nouvelle_adr_num.append(clean_element)
+
+    return nouvelle_adr_num
 
     """Enleve le + des numeros et enleve les valeurs manquantes"""
     def correction_tel(df):
