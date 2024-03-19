@@ -39,6 +39,7 @@ def load_formatted_data(data_fname:str) -> pd.DataFrame:
 """ once they are all done, call them in the general sanitizing function """"
 def sanitize_data(df:pd.DataFrame) -> pd.DataFrame:
     """ One function to do all sanitizing"""
+    """ Still need to import every other function defined below and use them once to clean the data set"""
     import re
 
 def clean_address_numbers(adr_num):
